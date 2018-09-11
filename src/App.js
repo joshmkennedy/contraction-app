@@ -24,17 +24,28 @@ class App extends Component {
   render() {
     const styles = {
       textAlign: 'center',
-      fontSize: '45px'
+      //fontSize: 45+'px'
+      //width: 100 + '%'
     }
-
+    const topBar = {
+      padding:30+'px',
+      background:'pink',
+      display:'flex',
+      justifyContent:'space-between'
+    }
+    const title = {
+      color:'white',
+    }
     return (
       <div>
-      <h1>Contraction Timer</h1>
       <Timer>
         {({ on, softReset, mystop, time})=>(
-            <div style={styles}>
-              {this.parseTime(time)}
+          <div style={styles}>
+              <div style={topBar}>
+              <h1 style={title}>Contraction Timer</h1>
               <button onClick={mystop}>{on ? "pause" : "start"}</button>
+              </div>
+              {this.parseTime(time)}
               <Stats time ={time} softReset={softReset} parsedTime={this.parseTime(time)} on={on}/>
           </div>
         )}
