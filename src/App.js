@@ -4,7 +4,29 @@ import Stats from './components/Stats.js'
 import Timer from './components/Timer.js'
 import './App.css';
 
+
+
+//colors
+const colors={
+  mainBgColor : '#faf3e5',
+  darkBlue : '#3f5872',
+  yellow : '#f6bc64',
+  red : '#e5584e',
+  purple : '#a5537d',
+  lightGrey : '#efefef',
+  grey : '#dcdde0',
+}
+const font={
+  fontFamily: 'Source Sans Pro'
+}
 class App extends Component {
+
+  constructor(props){
+    super(props)
+    this.state={
+      buttonHover:false
+    }
+  }
   
   parseTime = (time) => {
     let seconds = time
@@ -20,33 +42,68 @@ class App extends Component {
     const formatted = `${displayedHours}:${displayedMinutes}:${displayedSeconds}`
     return formatted
   }
-  
+  toggleHover = () => {
+    this.setState({ buttonHover: !this.state.buttonHover })
+  }
+  buttonHoverColor = () => this.state.buttonHover ? colors.yellow : colors.darkBlue
   render() {
+    //styles
     const styles = {
       textAlign: 'center',
+      height:100+'%',
+      
       //fontSize: 45+'px'
       //width: 100 + '%'
     }
     const topBar = {
       padding:30+'px',
-      background:'pink',
+      background:colors.red,
+      borderRadius:'0 0 25px 25px',
       display:'flex',
+      alignItems:'center',
       justifyContent:'space-between'
     }
     const title = {
       color:'white',
+      fontFamily:'Source Sans Pro',
+
     }
+     
+    const regBtn ={
+      color: 'white',
+      fontFamily: 'Source Sans Pro',
+      background:this.buttonHoverColor(),
+      border:'none',
+      padding:'10px 35px',
+      borderRadius:10+'px',
+      fontSize:'20px',
+    }
+    const appBody={}
+    
     return (
+
       <div>
       <Timer>
         {({ on, softReset, mystop, time})=>(
           <div style={styles}>
               <div style={topBar}>
               <h1 style={title}>Contraction Timer</h1>
-              <button onClick={mystop}>{on ? "pause" : "start"}</button>
+              <a style={regBtn} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover} onClick={mystop}>{on ? "pause" : "start"}</a>
               </div>
-              {this.parseTime(time)}
+              {/* body of app */}
+              <div  style={appBody}>
+              <div style={{
+                color:on?colors.darkBlue:colors.grey,
+                fontSize:45+'px',
+                font,
+                fontWeight:'100'
+                }}>
+
+                  {this.parseTime(time)}
+                
+              </div>
               <Stats time ={time} softReset={softReset} parsedTime={this.parseTime(time)} on={on}/>
+              </div>
           </div>
         )}
       </Timer >  
