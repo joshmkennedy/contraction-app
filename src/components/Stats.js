@@ -44,7 +44,7 @@ export default class Stats extends Component {
         ?<button onClick={this.recordTheTime.bind(this)}>record {this.state.contraction? "contraction":"rest"}</button>:''
         }
        <Averages  dataAverage={this.state.recordArray} />
-        <History BgColor={this.state.contraction}  allRecords={this.state.recordArray}/>
+        <History BgColor={this.state.contraction} colors={this.props.colors} allRecords={this.state.recordArray}/>
 
       </div>
     )

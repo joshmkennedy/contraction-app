@@ -19,7 +19,9 @@ export default class Averages extends Component {
       AverageTheData = (data) => {
             if(data.length>0){
 
-            const time = data.map(record=>record.time)
+            const time = data
+                              .filter(index=>index<10)
+                              .map(record=>record.time)
             const sum = time.reduce((total, record)=>{
                   return total + record
             }, 0)

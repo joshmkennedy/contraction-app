@@ -15,6 +15,7 @@ const colors={
   purple : '#a5537d',
   lightGrey : '#efefef',
   grey : '#dcdde0',
+  green: "#89b099"
 }
 const font={
   fontFamily: 'Source Sans Pro'
@@ -102,7 +103,7 @@ class App extends Component {
                   {this.parseTime(time)}
                 
               </div>
-              <Stats time ={time} softReset={softReset} parsedTime={this.parseTime(time)} on={on}/>
+              <Stats time ={time} colors={colors} softReset={softReset} parsedTime={this.parseTime(time)} on={on}/>
               </div>
           </div>
         )}
