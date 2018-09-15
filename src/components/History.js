@@ -29,12 +29,13 @@ export default class History extends Component {
                     onClick={this.toggle}>
                         {this.state.showList ? "hide history" : "show history"}
                     </button>
+                    {this.state.showList ? (
                     <div style={{
                           height: '400px',
                           overflow: "scroll"
                     }}>
                         
-                       {this.state.showList? (
+                       
                                 <ul style={{
                                 textAlign: "left",
                                 listStyle: 'none',
@@ -59,10 +60,11 @@ export default class History extends Component {
                                 })
                                 }
                           </ul>
-                       ):''}
+                      
                     </div>
-      
+                    ) : ''}
             </div>
+             
         )
       }
 }

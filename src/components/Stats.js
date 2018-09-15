@@ -10,6 +10,8 @@ export default class Stats extends Component {
     this.state = {
       recordArray:[],
       contraction:true,
+      hover:false,
+      display:1,
     }
     
   }
@@ -32,34 +34,85 @@ export default class Stats extends Component {
     this.switchRecordType()
     this.props.softReset()
   }
-  createdata = ()=>{
-    const data =[{x:0,y:0}]
-    if(this.state.recordArray.length>0){
-    const times = this.state.recordArray
-      .map(record=>record.time)
-     times.forEach((record, i)=>{
-       data.push({x:record,y:i})
-       //console.log(data[0].x)
-       return this.data
-
-     })  
+  buttonHover=()=>{
+    this.setState({
+      hover:!this.state.hover
+    })
+  }
+  buttonColor = ()=>{
+    if(this.state.contraction){
+      if(this.state.hover){
+        return this.props.colors.darkerRed
+      }
+      return this.props.colors.red
+    }else{
+      if(this.state.hover){
+        return this.props.colors.darkerDarkBlue
+      }
+      return this.props.colors.darkBlue
+    }
+  }       
+  nextDisplay= ()=>{
+    if(this.state.display !== 3){
+     return this.setState({display:this.state.display +1})
+    }else{
+      return this.setState({display:1})
     }
   }
-       
-
+  prevDisplay= ()=>{
+    if (this.state.display !== 1) {
+      return this.setState({ display: this.state.display - 1 })
+    } else {
+      return this.setState({ display: 3 })
+    }
+  }
+  
   
   render() {
     
     return (
-      <div>
-        <Chart data={this.state.recordArray}  svgWidth='700' svgHeight='300' />
-        {this.props.on
-        ?<button onClick={this.recordTheTime.bind(this)}>record {this.state.contraction? "contraction":"rest"}</button>:''
+      <div style={{
+        position:'relative',
+      }}>
+        <div style={{
+          display:'flex',
+          justifyContent:'space-between',
+          padding:'20px',
+
+        }}>
+          <span onClick={this.prevDisplay}> {'<'} </span>
+         {this.state.display===1? <Averages dataAverage={this.state.recordArray} />:''}
+          {this.state.display === 2 ? <Chart data={this.state.recordArray} svgWidth='700' svgHeight='300' /> : ''}
+          {this.state.display === 3 ? <History BgColor={this.state.contraction} colors={this.props.colors} allRecords={this.state.recordArray} /> : ''}
+          <span onClick={this.nextDisplay}>{'>'}</span>
+        </div>
+        {this.props.on//hides and shows the button
+          ? <button 
+            style={{
+              width:'100%',
+              border:this.props.colors.red,
+              background:this.buttonColor(),
+              height:'75px',
+              fontSize:'28px',
+              color:'white',
+              display:'flex',
+              justifyContent:'space-between',
+              padding:'20px',
+              position:'absoulute',
+              bottom:'0',
+              left:'0',
+              right:'0'
+            }}
+            onMouseEnter={this.buttonHover}
+            onMouseLeave={this.buttonHover} 
+            onClick={this.recordTheTime.bind(this)}>
+            <span>record {this.state.contraction 
+              ? "contraction" 
+              : "rest"} </span>
+            {this.props.parsedTime}
+          </button> 
+          : ''
         }
-       <Averages  dataAverage={this.state.recordArray} />
-        <History BgColor={this.state.contraction} colors={this.props.colors} allRecords={this.state.recordArray}/>
-
-
       </div>
     )
   }

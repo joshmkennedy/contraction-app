@@ -10,8 +10,10 @@ import './App.css';
 const colors={
   mainBgColor : '#faf3e5',
   darkBlue : '#3f5872',
+  darkerDarkBlue:'#28394b',
   yellow : '#f6bc64',
   red : '#e5584e',
+  darkerRed:'#b43b33',
   purple : '#a5537d',
   lightGrey : '#efefef',
   grey : '#dcdde0',
@@ -52,7 +54,7 @@ class App extends Component {
     const styles = {
       textAlign: 'center',
       height:100+'%',
-      
+      height:'100vh',
       //fontSize: 45+'px'
       //width: 100 + '%'
     }
@@ -99,11 +101,8 @@ class App extends Component {
                 font,
                 fontWeight:'100'
                 }}>
-
-                  {this.parseTime(time)}
-                
               </div>
-              <Stats time ={time} colors={colors} softReset={softReset} parsedTime={this.parseTime(time)} on={on}/>
+              <Stats time={time} colors={colors} softReset={softReset} parsedTime={this.parseTime(time)} on={on}/>
               </div>
           </div>
         )}
