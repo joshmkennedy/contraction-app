@@ -17,11 +17,12 @@ export default class Stats extends Component {
   }
   
   switchRecordType=()=>{
+    if(this.props.on){
     this.state.contraction 
       ? this.setState({ contraction: false }) 
       : this.setState({contraction:true})
   }
-
+  }
   recordTheTime=()=>{
      this.setState({
        recordArray: [{
@@ -40,18 +41,26 @@ export default class Stats extends Component {
     })
   }
   buttonColor = ()=>{
-    if(this.state.contraction){
-      if(this.state.hover){
-        return this.props.colors.darkerRed
+   if(this.props.on){ 
+      if(this.state.contraction){
+        if(this.state.hover){
+          return this.props.colors.darkerRed
+        }
+        return this.props.colors.red
+      }else if(!this.state.contracting){
+        if(this.state.hover){
+          return this.props.colors.darkerDarkBlue
+        }
+        return this.props.colors.darkBlue
       }
-      return this.props.colors.red
     }else{
-      if(this.state.hover){
+     if (this.state.hover) {
         return this.props.colors.darkerDarkBlue
       }
-      return this.props.colors.darkBlue
+        return this.props.colors.darkBlue
+      }
     }
-  }       
+         
   nextDisplay= ()=>{
     if(this.state.display !== 3){
      return this.setState({display:this.state.display +1})
@@ -69,7 +78,14 @@ export default class Stats extends Component {
   
   
   render() {
-    
+    const sliderBtn = {
+      height: '100%',
+      width: "30px",
+      background: this.props.colors.purple,
+      display:'flex',
+      flexFlow:'column',
+
+    }
     return (
       <div style={{
         position:'relative',
@@ -78,25 +94,28 @@ export default class Stats extends Component {
           display:'flex',
           justifyContent:'space-between',
           padding:'20px',
-
+          alignItems:'center',
         }}>
-          <span onClick={this.prevDisplay}> {'<'} </span>
+          <span 
+          style={sliderBtn} 
+          onClick={this.prevDisplay}> {'<'} </span>
          {this.state.display===1? <Averages dataAverage={this.state.recordArray} />:''}
           {this.state.display === 2 ? <Chart data={this.state.recordArray} svgWidth='700' svgHeight='300' /> : ''}
           {this.state.display === 3 ? <History BgColor={this.state.contraction} colors={this.props.colors} allRecords={this.state.recordArray} /> : ''}
           <span onClick={this.nextDisplay}>{'>'}</span>
         </div>
-        {this.props.on//hides and shows the button
-          ? <button 
+          <button 
             style={{
               width:'100%',
               border:this.props.colors.red,
               background:this.buttonColor(),
-              height:'75px',
-              fontSize:'28px',
+              height:'10vw',
+              fontSize:'5vw',
               color:'white',
               display:'flex',
               justifyContent:'space-between',
+              alignItems:'center',
+              lineHeight:'0',
               padding:'20px',
               position:'absoulute',
               bottom:'0',
@@ -105,14 +124,16 @@ export default class Stats extends Component {
             }}
             onMouseEnter={this.buttonHover}
             onMouseLeave={this.buttonHover} 
-            onClick={this.recordTheTime.bind(this)}>
-            <span>record {this.state.contraction 
-              ? "contraction" 
-              : "rest"} </span>
+            onClick={this.props.on?this.recordTheTime.bind(this):this.props.start}
+            >
+            <span> 
+              {!this.props.on ? "START" : this.state.contraction 
+                ? "Record Contraction" 
+                : "Record Rest"
+              } 
+              </span>
             {this.props.parsedTime}
           </button> 
-          : ''
-        }
       </div>
     )
   }

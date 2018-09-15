@@ -5,12 +5,12 @@ export default class History extends Component {
   constructor(props){
         super(props)
         this.state = {
-              showList:false,
+
         }
   }
-      toggle=()=>{
+     /*  toggle=()=>{
             this.setState({showList: !this.state.showList})
-      }
+      } */
   
       render() {
         return (
@@ -19,28 +19,19 @@ export default class History extends Component {
             style={{
                           textAlign: "left",
                               
-                          width: '250px',
+                          width: '75%',
             }}
             >
-                    <button style={{
-                          padding: "10px 15px",
-                          background: this.props.colors.yellow,
-                    }}
-                    onClick={this.toggle}>
-                        {this.state.showList ? "hide history" : "show history"}
-                    </button>
-                    {this.state.showList ? (
+               
+                    
                     <div style={{
                           height: '400px',
                           overflow: "scroll"
                     }}>
-                        
-                       
                                 <ul style={{
                                 textAlign: "left",
                                 listStyle: 'none',
-                                width: '250px',
-
+                                width: '75%',
                           }}>
 
                                 {this.props.allRecords.map((record, i, ) => {
@@ -62,7 +53,7 @@ export default class History extends Component {
                           </ul>
                       
                     </div>
-                    ) : ''}
+                    
             </div>
              
         )

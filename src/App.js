@@ -53,8 +53,10 @@ class App extends Component {
     //styles
     const styles = {
       textAlign: 'center',
-      height:100+'%',
       height:'100vh',
+      display:'flex',
+      flexFlow:'column',
+      justifyContent:'space-between'
       //fontSize: 45+'px'
       //width: 100 + '%'
     }
@@ -81,33 +83,21 @@ class App extends Component {
       borderRadius:10+'px',
       fontSize:'20px',
     }
-    const appBody={}
+
     
     return (
-
       <div>
-      <Timer>
-        {({ on, softReset, mystop, time})=>(
-          <div style={styles}>
-              <div style={topBar}>
-              <h1 style={title}>Contraction Timer</h1>
-              <a style={regBtn} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover} onClick={mystop}>{on ? "pause" : "start"}</a>
-              </div>
-              {/* body of app */}
-              <div  style={appBody}>
-              <div style={{
-                color:on?colors.darkBlue:colors.grey,
-                fontSize:45+'px',
-                font,
-                fontWeight:'100'
-                }}>
-              </div>
-              <Stats time={time} colors={colors} softReset={softReset} parsedTime={this.parseTime(time)} on={on}/>
-              </div>
-          </div>
-        )}
-      </Timer >  
-
+        <Timer>
+          {({ on, softReset, mystop, time})=>(
+            <div style={styles}>
+                <div style={topBar}>
+                  <h1 style={title}>Contraction Timer</h1>
+                  <a style={regBtn} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover} onClick={mystop}>{on ? "pause" : "start"}</a>
+                </div>
+                <Stats time={time} colors={colors} start={mystop} softReset={softReset} parsedTime={this.parseTime(time)} on={on}/>
+            </div>
+          )}
+        </Timer >  
       </div>
     );
     
