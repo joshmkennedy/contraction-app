@@ -22,12 +22,12 @@ export default class Stats extends Component {
 
   recordTheTime=()=>{
      this.setState({
-       recordArray: [...this.state.recordArray,{
+       recordArray: [{
           contracting:this.state.contraction,
           time:this.props.time,
           parsedTime:this.props.parsedTime
         },
-        ],
+         ...this.state.recordArray],
     })
     this.switchRecordType()
     this.props.softReset()
@@ -52,7 +52,7 @@ export default class Stats extends Component {
     
     return (
       <div>
-        {/* <Chart data={this.state.recordArray}  svgWidth='700' svgHeight='300'/> */}
+        <Chart data={this.state.recordArray}  svgWidth='700' svgHeight='300' />
         {this.props.on
         ?<button onClick={this.recordTheTime.bind(this)}>record {this.state.contraction? "contraction":"rest"}</button>:''
         }
