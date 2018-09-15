@@ -84,6 +84,7 @@ export default class Stats extends Component {
       background: this.props.colors.purple,
       display:'flex',
       flexFlow:'column',
+      justifyContent:'center'
 
     }
     return (
@@ -92,9 +93,11 @@ export default class Stats extends Component {
       }}>
         <div style={{
           display:'flex',
+          height:'300px',
           justifyContent:'space-between',
           padding:'20px',
           alignItems:'center',
+          minHeight:'300px'
         }}>
           <span 
           style={sliderBtn} 
@@ -102,21 +105,23 @@ export default class Stats extends Component {
          {this.state.display===1? <Averages dataAverage={this.state.recordArray} />:''}
           {this.state.display === 2 ? <Chart data={this.state.recordArray} svgWidth='700' svgHeight='300' /> : ''}
           {this.state.display === 3 ? <History BgColor={this.state.contraction} colors={this.props.colors} allRecords={this.state.recordArray} /> : ''}
-          <span onClick={this.nextDisplay}>{'>'}</span>
+          <span 
+            style={sliderBtn}
+            onClick={this.nextDisplay}>{'>'}</span>
         </div>
           <button 
             style={{
               width:'100%',
               border:this.props.colors.red,
               background:this.buttonColor(),
-              height:'10vw',
-              fontSize:'5vw',
+              height:'75px',
+              fontSize:'24px',
               color:'white',
               display:'flex',
               justifyContent:'space-between',
               alignItems:'center',
               lineHeight:'0',
-              padding:'20px',
+              padding:'0 30px',
               position:'absoulute',
               bottom:'0',
               left:'0',

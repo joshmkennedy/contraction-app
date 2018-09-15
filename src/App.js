@@ -61,7 +61,7 @@ class App extends Component {
       //width: 100 + '%'
     }
     const topBar = {
-      padding:30+'px',
+      height:'75px',
       background:colors.red,
       borderRadius:'0 0 25px 25px',
       display:'flex',
