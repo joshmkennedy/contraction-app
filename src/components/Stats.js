@@ -79,11 +79,13 @@ export default class Stats extends Component {
   
   render() {
     const sliderBtn = {
-      height: '100%',
+      height: '30px',
       width: "30px",
       background: this.props.colors.purple,
       display:'flex',
+      borderRadius:'5px',
       flexFlow:'column',
+      color:'white',
       justifyContent:'center'
 
     }
@@ -92,7 +94,7 @@ export default class Stats extends Component {
         position:'relative',
         height:'-webkit-fill-available',
         display:'flex',
-        justifyContent:'space-around',
+        justifyContent:'space-between',
         flexFlow:'column',
         marginBottom:'0',
 
@@ -103,14 +105,24 @@ export default class Stats extends Component {
           justifyContent:'space-between',
           padding:'20px',
           alignItems:'center',
-          minHeight:'300px'
+          minHeight:'300px',
+          margin:'auto 0'
         }}>
           <span 
           style={sliderBtn} 
           onClick={this.prevDisplay}> {'<'} </span>
-         {this.state.display===1? <Averages dataAverage={this.state.recordArray} />:''}
-          {this.state.display === 2 ? <Chart data={this.state.recordArray} svgWidth='700' svgHeight='300' /> : ''}
-          {this.state.display === 3 ? <History BgColor={this.state.contraction} colors={this.props.colors} allRecords={this.state.recordArray} /> : ''}
+          <div style={{
+            boxShadow: '0 0 20px rgba(0,0,0,0.2)',
+            display:'block',
+            width:'100%',
+            height:'100%',
+            margin:'10px',
+            padding:'20px',
+          }}>
+            {this.state.display===1? <Averages dataAverage={this.state.recordArray} />:''}
+            {this.state.display === 2 ? <Chart data={this.state.recordArray} svgWidth='700' svgHeight='300' /> : ''}
+            {this.state.display === 3 ? <History BgColor={this.state.contraction} colors={this.props.colors} allRecords={this.state.recordArray} /> : ''}
+          </div>
           <span 
             style={sliderBtn}
             onClick={this.nextDisplay}>{'>'}</span>

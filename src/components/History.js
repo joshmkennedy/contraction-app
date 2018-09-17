@@ -25,7 +25,7 @@ export default class History extends Component {
                
                     
                     <div style={{
-                          height: '400px',
+                          height: '300px',
                           overflow: "scroll"
                     }}>
                                 <ul style={{
