@@ -90,6 +90,12 @@ export default class Stats extends Component {
     return (
       <div style={{
         position:'relative',
+        height:'-webkit-fill-available',
+        display:'flex',
+        justifyContent:'space-around',
+        flexFlow:'column',
+        marginBottom:'0',
+
       }}>
         <div style={{
           display:'flex',

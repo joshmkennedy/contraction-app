@@ -56,17 +56,19 @@ class App extends Component {
       height:'100vh',
       display:'flex',
       flexFlow:'column',
-      justifyContent:'space-between'
+      justifyContent:'start'
       //fontSize: 45+'px'
       //width: 100 + '%'
     }
     const topBar = {
       height:'75px',
       background:colors.red,
-      borderRadius:'0 0 25px 25px',
+      borderRadius:'0 0 24px 24px',
+      padding:'0 30px',
+      lineHeight:'0',
       display:'flex',
       alignItems:'center',
-      justifyContent:'space-between'
+      justifyContent:'flex-start'
     }
     const title = {
       color:'white',
@@ -92,12 +94,19 @@ class App extends Component {
             <div style={styles}>
                 <div style={topBar}>
                   <h1 style={title}>Contraction Timer</h1>
-                  <a style={regBtn} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover} onClick={mystop}>{on ? "pause" : "start"}</a>
+                  {/* <a style={regBtn} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover} onClick={mystop}>{on ? "pause" : "start"}</a> */}
                 </div>
-                <Stats time={time} colors={colors} start={mystop} softReset={softReset} parsedTime={this.parseTime(time)} on={on}/>
+                <Stats 
+                  time={time} 
+                  colors={colors} 
+                  start={mystop} 
+                  softReset={softReset} 
+                  parsedTime={this.parseTime(time)} 
+                  on={on}
+                />
             </div>
           )}
-        </Timer >  
+        </Timer>  
       </div>
     );
     
