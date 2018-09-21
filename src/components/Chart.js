@@ -68,10 +68,15 @@ export default class Chart extends Component {
       render() {
            const {svgWidth, svgHeight} = this.props
             return (
-                  <div style={{background:'white', display:'inline-block',textAlign:'center'}}>
+                  <div style={{background:'white', display:'inline-block',textAlign:'centernopm',
+                        width:'100%',
+                        boxSizing:'border-box',
+                        height:'100%',
+                        borderRadius:'20px',
+                  }}>
                   
                         <svg viewBox={`0 0  ${svgWidth} ${svgHeight}`} height='300'>
-                             
+                             {/*this.props.dataAverage.length<2?"RECORD MORE DATA":*/}
                               {this.transformData()} 
                               {this.axis()}  
                         </svg>

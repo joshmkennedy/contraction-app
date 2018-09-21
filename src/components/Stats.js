@@ -12,6 +12,7 @@ export default class Stats extends Component {
       contraction:true,
       hover:false,
       display:1,
+      amountToAverage: 5
     }
     
   }
@@ -75,7 +76,11 @@ export default class Stats extends Component {
       return this.setState({ display: 3 })
     }
   }
-  
+  handleAverageAmount = (event) => {
+    this.setState({
+      amountToAverage: event.target.value
+    })
+  }
   
   render() {
     const sliderBtn = {
@@ -98,7 +103,19 @@ export default class Stats extends Component {
         flexFlow:'column',
         marginBottom:'0',
 
-      }}>
+      }}><div 
+          style={{
+            width: '200px',
+
+          }}>
+          average the:
+        <select value={this.state.amountToAverage} onChange={this.handleAverageAmount.bind(this)} >
+          <option value={5}>last 5</option>
+          <option value={10}>last 10</option>
+          <option value={20}>last 20</option>
+          <option value={100}>all items</option>
+        </select>
+        </div>
         <div style={{
           display:'flex',
           height:'300px',
@@ -117,11 +134,13 @@ export default class Stats extends Component {
             width:'100%',
             height:'100%',
             margin:'10px',
-            padding:'20px',
+            padding:'0',
+            borderRadius:'20px'
           }}>
-            {this.state.display===1? <Averages dataAverage={this.state.recordArray} />:''}
-            {this.state.display === 2 ? <Chart data={this.state.recordArray} svgWidth='700' svgHeight='300' /> : ''}
-            {this.state.display === 3 ? <History BgColor={this.state.contraction} colors={this.props.colors} allRecords={this.state.recordArray} /> : ''}
+            
+            {this.state.display===1? <Averages dataAverage={this.state.recordArray} amountToAverage={this.state.amountToAverage} colors={this.props.colors} />:''}
+            {this.state.display === 2 ? <Chart data={this.state.recordArray} svgWidth='700' svgHeight='300' colors={this.props.colors}/> : ''}
+            {this.state.display === 3 ? <History BgColor={this.state.contraction} colors={this.props.colors} allRecords={this.state.recordArray} colors={this.props.colors}/> : ''}
           </div>
           <span 
             style={sliderBtn}

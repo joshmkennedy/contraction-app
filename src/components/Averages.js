@@ -5,14 +5,10 @@ export default class Averages extends Component {
       constructor(props){
             super(props)
             this.state = {
-                  amountToAverage:5
+                  
             }
       }
-      handleAverageAmount= (event)=>{
-            this.setState({
-                  amountToAverage:event.target.value
-            })
-      }
+      
       parseTime = (time) => {
             let seconds = time
             const hours = Math.floor(seconds / 3600)
@@ -28,24 +24,24 @@ export default class Averages extends Component {
             return formatted
       }      
       AverageTheData = (data) => {
-            if(data.length>0){
-            const amountToAverage = this.state.amountToAverage      
-            const time = data
-                              .map(record => record.time)
-                              .filter( (record,index)=>index<amountToAverage)
-                              
-            const sum = time.reduce((total, record)=>{
-                  return total + record
-            }, 0)
-            //console.log(time)
-            //console.log(data.length)
-            const average = sum/time.length
-            const roundedAverage = this.parseTime(Math.round(average))
-            return(roundedAverage)
-      }else{
-            return `00:00:00`
+            if (data.length > 0) {
+                  const amountToAverage = this.props.amountToAverage
+                  const time = data
+                        .map(record => record.time)
+                        .filter((record, index) => index < amountToAverage)
+
+                  const sum = time.reduce((total, record) => {
+                        return total + record
+                  }, 0)
+                  //console.log(time)
+                  //console.log(data.length)
+                  const average = sum / time.length
+                  const roundedAverage = this.parseTime(Math.round(average))
+                  return (roundedAverage)
+            } else {
+                  return `00:00:00`
+            }
       }
-}
       seperateContractions = (data)=>{
             const contracting = data.filter(time=> time.contracting===true )
             return this.AverageTheData(contracting)
@@ -58,15 +54,39 @@ export default class Averages extends Component {
             const AverageTimeContracting = this.seperateContractions(this.props.dataAverage)
             const avergeTimeBetweenContractin = this.seperateNonContractions(this.props.dataAverage)
             return (
-                  <div>
-                        <select  value={this.state.amountToAverage} onChange={this.handleAverageAmount.bind(this)} >
-                              <option value={5}>last 5</option>
-                              <option value={10}>last 10</option>
-                              <option value={20}>last 20</option>
-                              <option value={100}>all items</option>
-                        </select>
-                        <div>Average Contraction Duration: {AverageTimeContracting}</div>
-                        <div>Average Rest Duration: {avergeTimeBetweenContractin}</div>
+                  <div style={{
+                        background:this.props.colors.lightGrey,
+                        height:'100%',
+                        width:'100%',
+                        boxSizing:'border-box',
+                        borderRadius:'20px',
+                        padding:'5%',
+                        display:'flex',
+                        flexFlow:'column',
+                        justifyContent:'center',
+                        alignItems:'start'
+
+
+                  }}>
+                        
+                        <div style={{
+                              fontSize:'30px',
+                              textAlign:'left',
+                               paddingBottom:'20px',  
+                               display:'flex',
+                               justifyContent:'space-between',
+                               width:'100%',
+                               color:this.props.colors.red,
+                        }}><span>Average Contraction Duration:</span> <span>{AverageTimeContracting}</span></div>
+                        <div style={{
+                              fontSize: '30px',
+                              textAlign: 'left',
+                              paddingBottom:'20px',
+                              display:'flex',
+                              justifyContent:'space-between',
+                              width:'100%',
+                              color: this.props.colors.darkBlue,
+                        }}>Average Rest Duration: <span>{avergeTimeBetweenContractin}</span></div>
                   </div>
             )
       }
