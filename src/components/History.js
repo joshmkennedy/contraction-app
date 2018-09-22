@@ -19,25 +19,30 @@ export default class History extends Component {
             style={{
                           textAlign: "left",
                               
-                          width: '75%',
+                         
             }}
             >
                
                     
                     <div style={{
                           height: '300px',
-                          overflow: "scroll"
+                          overflow: "scroll",
+                          borderRadius:'20px',
+                          boxShadow:'inset 0 0 4px rgba(0,0,0,0.3)',
                     }}>
-                                <ul style={{
+                                <ul className='history' style={{
                                 textAlign: "left",
                                 listStyle: 'none',
-                                width: '75%',
+                                margin:'0',
+                                padding:'0',
+                                color:'white',
+                                fontSize:'20px',
                           }}>
 
                                 {this.props.allRecords.map((record, i, ) => {
                                       let styles = ''
                                       if (record.contracting) { styles = this.props.colors.red }
-                                      else { styles = this.props.colors.green }
+                                      else { styles = this.props.colors.darkBlue }
                                       return (
                                             <li style={{
                                                   background: styles,

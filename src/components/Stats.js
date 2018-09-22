@@ -88,20 +88,24 @@ export default class Stats extends Component {
       width: "30px",
       background: this.props.colors.purple,
       display:'flex',
+      flexBasis:'30px',
       borderRadius:'5px',
       flexFlow:'column',
       color:'white',
-      justifyContent:'center'
+      justifyContent:'center',
+      alignItems:'center'
 
     }
     return (
       <div style={{
         position:'relative',
-        height:'-webkit-fill-available',
+        height:'auto',
         display:'flex',
-        justifyContent:'space-between',
+        justifyContent:'space-around',
         flexFlow:'column',
         marginBottom:'0',
+        alignItems:'center',
+        padding:'20px',
 
       }}><div 
           style={{
@@ -119,6 +123,7 @@ export default class Stats extends Component {
         <div style={{
           display:'flex',
           height:'300px',
+          width:'100%',
           justifyContent:'space-between',
           padding:'20px',
           alignItems:'center',
@@ -140,7 +145,7 @@ export default class Stats extends Component {
             
             {this.state.display===1? <Averages dataAverage={this.state.recordArray} amountToAverage={this.state.amountToAverage} colors={this.props.colors} />:''}
             {this.state.display === 2 ? <Chart data={this.state.recordArray} svgWidth='700' svgHeight='300' colors={this.props.colors}/> : ''}
-            {this.state.display === 3 ? <History BgColor={this.state.contraction} colors={this.props.colors} allRecords={this.state.recordArray} colors={this.props.colors}/> : ''}
+            {this.state.display === 3 ? <History BgColor={this.state.contraction} colors={this.props.colors} allRecords={this.state.recordArray} /> : ''}
           </div>
           <span 
             style={sliderBtn}
@@ -148,10 +153,9 @@ export default class Stats extends Component {
         </div>
           <button 
             style={{
-              width:'100%',
-              border:this.props.colors.red,
+              width:'90%',
               background:this.buttonColor(),
-              height:'75px',
+              minHeight:'75px',
               fontSize:'24px',
               color:'white',
               display:'flex',
@@ -159,10 +163,10 @@ export default class Stats extends Component {
               alignItems:'center',
               lineHeight:'0',
               padding:'0 30px',
-              position:'absoulute',
-              bottom:'0',
-              left:'0',
-              right:'0'
+              borderRadius:'20px',
+              boxShadow: '0 0 20px rgba(0,0,0,0.2)',  
+              
+
             }}
             onMouseEnter={this.buttonHover}
             onMouseLeave={this.buttonHover} 

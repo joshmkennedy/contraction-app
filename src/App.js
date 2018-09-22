@@ -53,7 +53,7 @@ class App extends Component {
     //styles
     const styles = {
       textAlign: 'center',
-      height:'100vh',
+      //height:'100vh',
       display:'flex',
       flexFlow:'column',
       justifyContent:'start'
