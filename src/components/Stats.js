@@ -56,9 +56,9 @@ export default class Stats extends Component {
       }
     }else{
      if (this.state.hover) {
-        return this.props.colors.darkerDarkBlue
+        return this.props.colors.purple
       }
-        return this.props.colors.darkBlue
+        return this.props.colors.purple
       }
     }
          
@@ -122,7 +122,7 @@ export default class Stats extends Component {
         </div>
         <div style={{
           display:'flex',
-          height:'300px',
+          minHeight:'300px',
           width:'100%',
           justifyContent:'space-between',
           padding:'20px',
@@ -156,15 +156,18 @@ export default class Stats extends Component {
               width:'90%',
               background:this.buttonColor(),
               minHeight:'75px',
+              height:'auto',
               fontSize:'24px',
               color:'white',
               display:'flex',
-              justifyContent:'space-between',
+              flexFlow:'column wrap',
+              justifyContent:'space-evenly',
               alignItems:'center',
-              lineHeight:'0',
+              lineHeight:'1em',
               padding:'0 30px',
               borderRadius:'20px',
               boxShadow: '0 0 20px rgba(0,0,0,0.2)',  
+              marginTop:'10px'
               
 
             }}
@@ -172,7 +175,7 @@ export default class Stats extends Component {
             onMouseLeave={this.buttonHover} 
             onClick={this.props.on?this.recordTheTime.bind(this):this.props.start}
             >
-            <span> 
+            <span style={{display:'flex',flexFlow:'wrap'}}> 
               {!this.props.on ? "START" : this.state.contraction 
                 ? "Record Contraction" 
                 : "Record Rest"

@@ -62,7 +62,7 @@ class App extends Component {
     }
     const topBar = {
       height:'75px',
-      background:colors.red,
+      background:colors.purple,
       borderRadius:'0 0 24px 24px',
       padding:'0 30px',
       lineHeight:'0',
@@ -76,15 +76,7 @@ class App extends Component {
 
     }
      
-    const regBtn ={
-      color: 'white',
-      fontFamily: 'Source Sans Pro',
-      background:this.buttonHoverColor(),
-      border:'none',
-      padding:'10px 35px',
-      borderRadius:10+'px',
-      fontSize:'20px',
-    }
+
 
     
     return (
